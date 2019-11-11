@@ -58,7 +58,9 @@ function Login() {
     const styles = {
         background: "#7fffd4",
         borderRadius: 30,
-        width: 100, 
+        width: 225, 
+        height: 45,
+        fontSize: "15px",
         padding: "10px 20px",
         marginTop: "5%",
         color: "#333",

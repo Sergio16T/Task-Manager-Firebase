@@ -82,14 +82,15 @@ componentWillUnmount() {
       this.setState({
         width: window.innerWidth
       });
-      if (this.state.width < 720){
+      if (this.state.width < 800){
         this.setState({
-          responsive: false  
+          responsive: false,
         });
       }
-      if (this.state.width >= 720){
+      if (this.state.width >= 800){
         this.setState({
-          responsive: true
+          responsive: true,
+     
         });
       }
       // note took this.openMenu() out changed false and true to opposites 
@@ -113,7 +114,7 @@ componentWillUnmount() {
       
       });
     }
-    if(this.state.width >= 720) {
+    if(this.state.width >= 800) {
     this.setState({
       responsive: true
     });

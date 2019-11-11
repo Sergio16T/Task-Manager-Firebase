@@ -2,8 +2,8 @@
     margin-top: 5vh; 
 }
 .navSideBar-Container {
-    width: 20%; 
-    min-width: 210px;
+    position: inherit;
+    width: 210px; 
     background-color: rgb(250, 250, 250); 
     
 }
@@ -51,11 +51,14 @@
 .project-list {
     display: none; 
 }
+.project-item {
+    list-style: none;
+}
 .project-item:hover {
     background-color: rgb(255, 255, 255); 
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 800px) {
     .navSideBar-Container {
         left: -210px; 
         position: absolute;
@@ -65,7 +68,7 @@
         transition: all 350ms ease-in; 
     }
     .navSideBar-Containeractive{
-        min-width: 210px; 
+        width: 210px; 
         position: absolute; 
         left: 0; 
         height: 100vh; 
