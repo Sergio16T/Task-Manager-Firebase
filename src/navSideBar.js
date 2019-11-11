@@ -3,18 +3,19 @@ import ModalBox from './modalBox';
 import {Link} from 'react-router-dom'; 
 import './navSideBar.css'; 
 import './modalBox.css'; 
-
+import {db} from './App'; 
+import 'firebase/firestore'; 
 
 class NavSideBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            projects: [{projectTitle: 'Welcome', id: Math.random(), path: "/"},{projectTitle: 'Development', id: Math.random(), path: "/devToDo"}, {projectTitle: 'Personal', id: Math.random(), path: "/personal" }],
             rightArrowClassName: 'right-arrow',
             projectListClassName: 'project-list',
             modalBoxClassName: 'modalBox inactive',
             text: '',
-            priorityText: ''
+            priorityText: '', 
+            projects: []
          
         }
         this.rotateArrow = this.rotateArrow.bind(this); 
@@ -26,7 +27,20 @@ class NavSideBar extends React.Component {
         
 
     }
- 
+    componentDidMount() {
+        db.collection(`users/${this.props.user.uid}/taskProjects`).onSnapshot(snapshot => {
+            const docs = []; 
+            snapshot.forEach(doc => {
+              docs.push({
+                ...doc.data(),
+                id: doc.id
+              }); 
+            }); 
+            this.setState({
+              projects: docs
+            }); 
+          }) 
+    }
     rotateArrow() {
         if (this.state.rightArrowClassName === 'right-arrow'){
             this.setState({
@@ -50,22 +64,17 @@ class NavSideBar extends React.Component {
             modalBoxClassName: "modalBox inactive",
         })
     }
-    addProject() {
+    addProject() { //need to add to database 
         if (!this.state.text.length | !this.state.priorityText.length) {
             return; 
         }
-
-        const newProject = {
-            projectTitle: this.state.text,
-            id: Math.random(),
-            priority: this.state.priorityText,
-            path : '/project'
-        }
-        this.setState({
-            projects: this.state.projects.concat(newProject), 
-            text: '',
-            priorityText: ''
-        });
+     
+        db.collection(`users/${this.props.user.uid}/taskProjects`)
+        .doc(`${this.state.text}`)
+        .set(({
+            category: `${this.state.priorityText}`
+        }))
+      
         this.cancelModal(); 
     }
     handleProjectInput(e){
@@ -101,8 +110,12 @@ class NavSideBar extends React.Component {
                         <i onClick = {this.openModal} id="plus" className = 'fas fa-plus'></i>
                     </header>
                     <ul className= {this.state.projectListClassName}>
-                        {this.state.projects.map(project => (
-                            <Link to ={project.path} key={project.id} onClick={this.props.clickHam}><li className="project-item">{project.projectTitle}</li></Link>
+                        {this.state.projects && this.state.projects.map(project => (
+                            <Link to ={`/Projects/${project.id}`} key={project.id} onClick={this.props.clickHam}><li className="project-item">{project.id}</li></Link>
+                          /*
+                          <ul>
+                               <a href={`/Projects/${project.id}`}>{project.id}</a>
+                            </ul> */ 
                         ))}
                         
                     </ul>

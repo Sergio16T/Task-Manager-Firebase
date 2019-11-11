@@ -2,8 +2,8 @@
   "name": "to-do-app-reactjs-org",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://sergio16t.github.io/ToDo-List-App",
   "dependencies": {
+    "firebase": "^7.2.3",
     "framer-motion": "^1.6.14",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

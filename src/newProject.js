@@ -4,17 +4,12 @@ import './App.css';
 
 
 
-class Project extends React.Component {
-constructor(props) {
-    super(props);
-    this.state = { 
-        items: [{text: 'Welcome! Create a task!', id: Date.now()}], text: ''}
-  }
- render() {
+function Project({user}) {
+
      return (
-         <App items ={this.state.items}></App>
+         <App user ={user} > </App>
      )
- }
+ 
 }
 
 export default Project; 

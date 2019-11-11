@@ -1,33 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion'; 
+import React from 'react'; 
 import NavSideBar from './navSideBar';
 import TodoList from './todoList'; 
 import './App.css';
+import firebase from 'firebase/app';
+import 'firebase/firestore'; 
+import 'firebase/database'; 
+import 'firebase/auth'; 
+import { firebaseConfig } from './firebaseConfig'; 
+import Form from './Form'; 
+import WelcomeText from './WelcomeText'; 
+
+
+firebase.initializeApp(firebaseConfig); 
+
+export const db = firebase.firestore(); 
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //this.state = { items: [{text: 'Schedule meeting with senior developer', id: Date.now()}, {text: 'Become a Javascript Ninja', id: Date.now()}], text: '' };
     this.state = {
-      items: this.props.items,
-      text: '',
       responsive: true,
       width: window.innerWidth
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.openMenu = this.openMenu.bind(this); 
-    this.clickHamburger = this.clickHamburger.bind(this);
-   
-
+    this.clickHamburger = this.clickHamburger.bind(this); 
   }
+
 _isMounted  = false;
+
 componentDidMount() {
+  console.log(this.params);
   this._isMounted  = true; 
   this.clickHamburger();
   window.addEventListener('resize', this.updateDimensions.bind(this));
   document.addEventListener('DOMContentLoaded', this.updateDimensions.bind(this)); // this listener should be on the Document Object? 
+  
 }
+
 
 
 componentWillUnmount() {
@@ -38,70 +48,27 @@ componentWillUnmount() {
 
 
   render() {
-    const styles = {
-      background: "#7fffd4",
-      borderRadius: 30,
-      width: 100, 
-      padding: "10px 20px",
-      margin: "0vh 2vh",
-      color: "#333",
-      outline: "none",
-      border: "none",
-      cursour: "pointer"
-    };
     return (
       <div>
         <div className="app-header">
         <i ref ="hamburger" onClick = {this.openMenu} id ="hamburger" className="fas fa-bars"></i>
-        <h3>To Do List</h3>
+        <h3>Task Manager</h3>
+        <div id="userPhoto" style={{backgroundImage: this.props.user ? `url(${this.props.user.photoUrl})`: ''}}></div>
+        <div id="userName">{this.props.user.displayName}</div>
+        <button onClick={() => {firebase.auth().signOut();}} id="logOutButton">Log out</button>
         </div>
         <div className ="wrapper">
-        <NavSideBar responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
+        <NavSideBar user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
         <div className='listContainer'>
-        <form onSubmit={this.handleSubmit}>
-          <label id= "inputLabel" htmlFor="new-todo">
-            What needs to be done?
-          </label>
-          <input
-            id="new-todo"
-            onChange={this.handleChange}
-            value={this.state.text}
-          />
-          <motion.button 
-          style ={styles}
-          whileHover ={{scale: 1.1}}
-          whileTap ={{scale: 0.9, x: "-5px", y: "5px"}}
-          >
-            <i className="fas fa-plus"></i>
-          </motion.button>
-        </form>
-        <TodoList items={this.state.items} /> 
+        <WelcomeText homePage ={this.props.homePage}/>
+        <Form homePage ={this.props.homePage} user = {this.props.user}/> 
+        <TodoList user={this.props.user}/> 
         </div>
         </div>
       </div>
     );
   }
   //Sets state of text to input value on change 
-  handleChange(e) {
-    this.setState({ text: e.target.value });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (!this.state.text.length) {
-      //prevent's empty text from being added to TO DO
-      return;
-    }
-    const newItem = {
-      text: this.state.text, // grabs text from state set by handleChange(e)
-      id: Date.now()
-    };
-
-    this.setState(state => ({
-      items: state.items.concat(newItem), // taking value of state.items and using concat which returns a new array of merged (existing array containing object(s) with addition of new object)
-      text: '' // resets to empty string ready for next input to use handleChange(e)
-    }));
-  }
 
   updateDimensions =() => {
     if(this._isMounted){
@@ -145,11 +112,31 @@ componentWillUnmount() {
     this.refs.hamburger.click(); 
   }
 
- 
 
 }
 
 
 export default App;
+export { firebase }; 
 
+/*
+handleSubmit(e) {
+  e.preventDefault();
+  if (!this.state.text.length) {
+    //prevent's empty text from being added to TO DO
+    return;
+  }
+  db.collection('Projects')
+  .doc()
 
+  const newItem = {
+    text: this.state.text, // grabs text from state set by handleChange(e)
+    id: Date.now()
+  };
+
+  this.setState(state => ({
+    items: state.items.concat(newItem), // taking value of state.items and using concat which returns a new array of merged (existing array containing object(s) with addition of new object)
+    text: '' // resets to empty string ready for next input to use handleChange(e)
+  }));
+}
+*/ 

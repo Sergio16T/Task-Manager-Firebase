@@ -1,26 +1,45 @@
 import React  from 'react';
 import { motion } from 'framer-motion'; 
+import { db } from './App'; 
+
+/* need to see db and if status complete or incomplete? 
+then set state accordingly. 
+*/
+
+
 
 class Button extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            isToggled: false
+            isToggled: this.props.taskComplete
         }
-        this.setToggle = this.setToggle.bind(this); 
+        //this.setToggle = this.setToggle.bind(this); 
+        this.setTaskComplete = this.setTaskComplete.bind(this); 
+        this.projectId = props.projectId; 
+        this.taskId = props.taskId; 
+        this.userId = props.user.uid; 
     }
-    setToggle() {
-            if (!this.state.isToggled) {
-            this.setState({
-                isToggled: true
-                }); 
-            } else {
-                this.setState({
-                    isToggled: false
-                }); 
-            }   
+  
+   setTaskComplete() {
+        let task = this.state.isToggled; 
+        let newValue = ''; 
+        if (task) {
+            newValue = false; 
+        } else {
+            newValue = true
+        }
+          db.collection(`users/${this.userId}/taskProjects`)
+          .doc(`${this.projectId}`) 
+          .collection('Tasks')
+          .doc(`${this.taskId}`)
+          .update({
+            Complete: newValue
+          });     
+          this.setState({
+              isToggled: newValue
+          })  
     }
-
     render() {
     const styles1 = {
         borderRadius: 30,
@@ -39,7 +58,7 @@ class Button extends React.Component {
             opacity: 1, 
             background: "#7fffd4",
             x: "-10px",
-            scale: 1.25,
+            scale: 1.15,
         },
         inactive: {
             opacity: 1,
@@ -50,9 +69,10 @@ class Button extends React.Component {
         };
         return (
             <motion.div
+            type="button"
             key = {this.props.index}
             className="toggleButton"
-            onClick={() => this.setToggle()}
+            onClick={() => this.setTaskComplete()}
             style ={styles1}
             animate ={this.state.isToggled ? "active" : "inactive"}
             variants ={variants}

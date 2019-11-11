@@ -10,23 +10,60 @@ body {
   height: 100%; 
   margin: 0; 
 }
+.app-header{
+  display: flex; 
+  background-color: #c04a40;
+}
+#logOutButton {
+  height: 40px;
+  width: 100px;
+  align-self: center;
+  margin: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(248, 248, 248, 0.8); 
+  font-size: .9rem;
+
+}
+#logOutButton:hover {
+  cursor: pointer;
+  color: rgba(248, 248, 248, 1); 
+}
 h3 {
+  align-self: center;
   margin: 0;
-  padding: 20px 0px; 
-  font-size: 2rem; 
+  font-size: 1.25rem; 
   font-weight: 400; 
   width: 100%; 
   text-align: center;
-  background-color: #c04a40; 
-  color: rgb(255, 255, 255, .8); 
+  color: rgba(248, 248, 248, 0.8); 
 }
+#userPhoto{
+  align-self: center; 
+  width: 50px; 
+  height: 40px; 
+  margin: 0 2%;
+  background-size: cover; 
+  border-radius: 50%; 
+}
+#userName{
+  font-size: .9rem;
+  align-self: center; 
+  color: rgba(248, 248, 248, 0.8); 
+}
+
 form {
-  margin-top: 5vh; 
+  margin-top: 3vh; 
+}  
+#new-todo {
+    border: 1px solid #ddd;
+    height: 20px;
+    border-radius: 5px;
 }
 .listContainer {
 display: flex; 
 flex-direction: column; 
-align-items: center;
+/*align-items: center; */
 
 }
 .listItems {
@@ -53,6 +90,9 @@ align-items: center;
 }
 #hamburger {
   display: none; 
+}
+.project-item{
+  list-style-image: radial-gradient(circle, #c04a40, #222222);
 }
 
 @media screen and (max-width: 550px) {
@@ -87,4 +127,21 @@ align-items: center;
   .listContainer > form {
     text-align: center; 
   }
+  #userPhoto {
+    width: 70px;
+    height: 40px;
+    
+  }
 }
+
+@media screen and (max-width: 400px) {
+  #userPhoto{
+    width: 90px;
+    height: 40px;
+  }
+
+ 
+
+}
+
+
