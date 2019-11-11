@@ -91,9 +91,7 @@ flex-direction: column;
 #hamburger {
   display: none; 
 }
-.project-item{
-  list-style-image: radial-gradient(circle, #c04a40, #222222);
-}
+
 
 @media screen and (max-width: 550px) {
   form {
