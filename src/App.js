@@ -21,7 +21,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       responsive: true,
-      width: window.innerWidth
+      width: window.innerWidth,
+      hamburgerClassName: '', 
+      navSideBarClassName: 'navSideBar-Container'
     }
     this.openMenu = this.openMenu.bind(this); 
     this.clickHamburger = this.clickHamburger.bind(this); 
@@ -51,14 +53,19 @@ componentWillUnmount() {
     return (
       <div>
         <div className="app-header">
-        <i ref ="hamburger" onClick = {this.openMenu} id ="hamburger" className="fas fa-bars"></i>
-        <h3>Task Manager</h3>
+        <div ref ="hamburger" id="hamburger2" className={this.state.hamburgerClassName} onClick={this.openMenu}>
+          <div id="top"></div>
+          <div id="middle"></div>
+          <div id="bottom"></div>
+        </div>
+        {/* <i ref ="hamburger" onClick = {this.openMenu} id ="hamburger" className="fas fa-bars"></i> */}
+        <h3>TaskHub</h3>
         <div id="userPhoto" style={{backgroundImage: this.props.user ? `url(${this.props.user.photoUrl})`: ''}}></div>
         <div id="userName">{this.props.user.displayName}</div>
         <button onClick={() => {firebase.auth().signOut();}} id="logOutButton">Log out</button>
         </div>
         <div className ="wrapper">
-        <NavSideBar user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
+        <NavSideBar navClass ={this.state.navSideBarClassName} activeHamburger ={this.state.hamburgerClassName} user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
         <div className='listContainer'>
         <WelcomeText homePage ={this.props.homePage}/>
         <Form homePage ={this.props.homePage} user = {this.props.user}/> 
@@ -93,11 +100,17 @@ componentWillUnmount() {
    
     if(this.state.responsive) {
       this.setState({
-        responsive: false
+        responsive: false,
+        hamburgerClassName: '',
+        navSideBarClassName: 'navSideBar-Container'
+        
       });
     } else {
       this.setState({
-        responsive: true
+        responsive: true,
+        hamburgerClassName: 'active', 
+        navSideBarClassName: 'navSideBar-Containeractive'
+      
       });
     }
     if(this.state.width >= 720) {

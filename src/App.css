@@ -12,7 +12,7 @@ body {
 }
 .app-header{
   display: flex; 
-  background-color: #c04a40;
+  background-color: #130e27;
 }
 #logOutButton {
   height: 40px;
@@ -53,12 +53,20 @@ h3 {
 }
 
 form {
-  margin-top: 3vh; 
+  margin: 2vh; 
 }  
+
+.listContainer ul {
+  padding: 0; 
+}
 #new-todo {
+    width: 400px;
     border: 1px solid #ddd;
     height: 20px;
     border-radius: 5px;
+    font-size: 20px; 
+    text-align: center; 
+    padding: 5px; 
 }
 .listContainer {
 display: flex; 
@@ -91,6 +99,20 @@ flex-direction: column;
 #hamburger {
   display: none; 
 }
+#hamburger div {
+  display: none; 
+}
+#formButton {
+background-color: #7fffd4;
+border-radius: 30px;
+width: 100px; 
+padding: 10px 20px;
+margin: 0vh 2vh; 
+color: #333; 
+outline: none; 
+border: none; 
+cursor: pointer;
+}
 
 
 @media screen and (max-width: 550px) {
@@ -108,14 +130,36 @@ flex-direction: column;
 @media screen and (max-width: 720px) {
   #hamburger {
     cursor: pointer;
-    display: block;
+    /* display: block; */
     font-size: 2rem;
-    padding: 20px;
-    color: rgb(255, 255, 255, .8);
+    /*padding: 20px;
+    color: rgb(255, 255, 255, .8); */ 
+    /* transition: left 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91) */
   }
+  #hamburger2 {
+    left: 15px; 
+    position: relative;
+  }
+  #hamburger2 div { 
+    display: block; 
+    width: 35px; 
+    height: 2px; 
+    margin-bottom: 8px; 
+    background-color: rgb(255, 255, 255, .8); 
+    transition: transform 500ms ease;  
+  }
+  #hamburger2.active #top{
+    transform: translateY(10px) rotate(-135deg); 
+  }
+  #hamburger2.active #middle {
+    transform: scale(0); 
+  }
+  #hamburger2.active #bottom {
+    transform: translateY(-10px) rotate(-45deg); 
+  }
+  
   .app-header {
     display: flex;
-    background-color: #c04a40;
     flex-direction: row;
     align-items: center;
   }
@@ -126,9 +170,12 @@ flex-direction: column;
     text-align: center; 
   }
   #userPhoto {
+    display: none; 
     width: 70px;
     height: 40px;
-    
+  }
+  #userName {
+    display: none; 
   }
 }
 
@@ -137,9 +184,16 @@ flex-direction: column;
     width: 90px;
     height: 40px;
   }
-
+  #new-todo {
+    width: 330px; 
+    height: 30px; 
+  }
+  #formButton {
+    margin: 2vh; 
+    width: 330px; 
+    height: 35px;
+  }
  
-
 }
 
 

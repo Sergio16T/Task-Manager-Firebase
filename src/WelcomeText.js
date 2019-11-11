@@ -7,8 +7,8 @@ export default function WelcomeText(props) {
 
     return (projectId === 'Welcome') ? (
         <div className="welcomeText">
-            <p>Hello! Welcome to Task Manager.</p> 
-            <p>To get started, create a new Task by clicking the green button!</p>
+            <p>Hello! Welcome to TaskHub.</p> 
+            <p>To get started, create a new task by clicking the green button!</p>
             <p>To add a new project click on the + sign in the navigation bar on the left! </p>
         </div>
        

@@ -15,7 +15,8 @@ class NavSideBar extends React.Component {
             modalBoxClassName: 'modalBox inactive',
             text: '',
             priorityText: '', 
-            projects: []
+            projects: [],
+            hamburgerActive: props.activeHamburger 
          
         }
         this.rotateArrow = this.rotateArrow.bind(this); 
@@ -27,6 +28,7 @@ class NavSideBar extends React.Component {
         
 
     }
+  
     componentDidMount() {
         db.collection(`users/${this.props.user.uid}/taskProjects`).onSnapshot(snapshot => {
             const docs = []; 
@@ -101,7 +103,7 @@ class NavSideBar extends React.Component {
                 text = {this.state.text}
                 priorityText = {this.state.priorityText}
             />
-            <div style ={{display: this.props.responsive ? 'block' : 'none'}} className ='navSideBar-Container'>
+            <div /*style ={{opacity: this.props.responsive ? 1 : 0}}*/ className ={this.props.navClass}>
                 <div className='panel-wrapper'>
                 <div className ="expansionPanel">
                     <header id="navSideBar-header">
@@ -112,9 +114,9 @@ class NavSideBar extends React.Component {
                     <ul className= {this.state.projectListClassName}>
                         {this.state.projects && this.state.projects.map(project => (
                             <Link to ={`/Projects/${project.id}`} key={project.id} onClick={this.props.clickHam}><li className="project-item">{project.id}</li></Link>
-                          /*
-                          <ul>
-                               <a href={`/Projects/${project.id}`}>{project.id}</a>
+                        /*
+                        <ul>
+                            <a href={`/Projects/${project.id}`}>{project.id}</a>
                             </ul> */ 
                         ))}
                         
@@ -122,7 +124,7 @@ class NavSideBar extends React.Component {
                 </div>
                 <div className ="expansionPanel"></div>
                 <div className ="expansionPanel"></div>
-                </div>
+            </div>
             </div>
             </div>
         )
