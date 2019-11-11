@@ -5,6 +5,6 @@ To Do App built with React, React Router, and the Framer Motion Library
 
 -Log in to begin your 'account' and you will get a welcome page instructing you on how to add project names, and how to add tasks to each project. 
 
-![To Do App Screen Shot](/screenShot1.png | width = 50%) 
-![To Do App Screen Shot](/screenShot2.png | width = 50%)
+![To Do App Screen Shot](/screenShot1.png) { width=50% }
+![To Do App Screen Shot](/screenShot2.png) { width=50% }
 
