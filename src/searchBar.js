@@ -8,10 +8,12 @@ export class Search extends React.Component {
         this.state = {
             query: '',
             users: [], 
-            matches: []
+            matches: [],
+            selectedUser: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.getUsers = this.getUsers.bind(this); 
+        this.selectUser = this.selectUser.bind(this); 
     }
     handleInputChange() {
         const matchArray = findMatches(this.refs.input.value, this.state.users);
@@ -43,17 +45,25 @@ export class Search extends React.Component {
           this.getUsers(); 
           //console.log(this.state.results); 
       }
-    
+    selectUser = (e) =>{
+        console.log(e.target.textContent);
+        this.setState({
+            selectedUser: e.target.textContent
+        });
+        
+    }
 
     render(){
         return (
+            <div className="selectUserContainer">
+           {this.state.selectedUser && ( <div className="userSelection">{this.state.selectedUser}</div> )}
             <div className="searchContainer">
-                <input id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/>
+                <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/>
                 {this.state.users && this.state.matches.map(user => (
-                <p className="searchResult" key ={user.uid}>{user.displayName}</p>
+                <p className="searchResult" key ={user.uid} onClick={this.selectUser}>{user.displayName}</p>
                 ))}
             </div>
-            
+            </div>
         )
     }
 }
