@@ -33,7 +33,7 @@ export default function Form(props) {
     }
   
     return (
-      <form onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
               {/* <label id= "inputLabel" htmlFor="new-todo">   */}
               {/* </label> */}
               <input

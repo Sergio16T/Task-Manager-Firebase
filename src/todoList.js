@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Button from './button';
 import './App.css';
-import { firebase, db } from './App'; 
+import './toDoList.css';
+import { db } from './App'; 
 import { useParams } from 'react-router-dom'; 
 import { Search } from './searchBar'; 
+import { TaskOwner } from './taskOwner'; 
 
 export function useCollection(user){
   const [items, setItems]= useState([]); 
@@ -33,23 +35,22 @@ export function useCollection(user){
 function TodoList(props) {
   const items = useCollection(props.user); 
   let { projectId } = useParams(); 
-  let users = getUsers(); 
+  /*let users = getUsers(); 
 
   async function getUsers() {
     const snapshot = await firebase.firestore().collection('users').get(); 
     return snapshot.docs.map(doc => doc.data()); 
   } 
 
-  useEffect(()=> {
-    console.log(users); 
-  })
+  */
 
 
 
     return (
-      <React.Fragment>
+      
       <ul>
         {items.map((item, index) => (
+            <div key ={item.id} className="taskRow">
           <div key = {`${index}a`} className ='itemContainer'>
             <li className ='listItems' key={item.id}>{item.Task}</li>
             <Button 
@@ -60,12 +61,17 @@ function TodoList(props) {
             user = {props.user}
             >
             </Button>
-        
-          </div>
+            </div>
+            <TaskOwner/> {/* place assignTaskOwner component here.. this is where you can open search component on click as modal box */}
+            </div>  
+            
+           
+          
         ))}
+          
       </ul>
-      <Search/>
-      </React.Fragment>
+      
+      
     );
   
 }

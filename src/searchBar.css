@@ -1,8 +1,19 @@
 .selectUserContainer {
-  text-align: center; 
+    text-align: center; 
+  
 }
-.searchResult {
 
+.searchContainer {
+    display: none; 
+    padding: 15px; 
+    border-radius: 15px; 
+    margin-top: 10px; 
+    position: absolute;
+    z-index: 1;
+    height: 20%; 
+    background-color: #fff; 
+    box-shadow: .5px 1px 1px 1px rgba(95, 95, 99, 0.425); 
+    left: 35vh; 
 }
 .searchResult:hover {
     text-decoration: underline;
@@ -10,7 +21,7 @@
 }
 #searchUserInput {
     outline:none; 
-    width: 400px;
+    width: 200px;
     border: 1px solid #ddd;
     height: 20px;
     border-radius: 15px;
@@ -23,3 +34,17 @@
     border: 1px solid #0d66b9; 
   
   }
+  .userSelection {
+      margin: 2vh; 
+  }
+#seperator {
+    width: 100px; 
+    height: 2px; 
+    margin: 20px auto; 
+    background-color: #0d66b9
+}
+@media screen and (max-width: 400px) {
+    .searchContainer{
+        left: 8vh; 
+    }
+}

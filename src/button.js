@@ -42,9 +42,11 @@ class Button extends React.Component {
     }
     render() {
     const styles1 = {
+        fontSize: ".8rem",
+        textAlign: "center",
         borderRadius: 30,
-        width: 65,
-        height: 65,
+        width: 60,
+        height: 30,
         padding: 10,
         margin:"auto",
         display: "flex",

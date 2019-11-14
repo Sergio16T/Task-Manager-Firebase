@@ -1,0 +1,22 @@
+
+.itemContainer {
+    background-color: #e5f4ff;
+    flex-basis: 340px; 
+    height: 100%; 
+    border-right: 2px solid #fff; 
+
+}
+.itemContainer * {
+    /*margin: 2vh;  */ 
+    padding: 1vh; 
+}
+.taskRow {
+    width: 80vh; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+  
+    height: 8vh;
+    border-radius: 15px;
+    margin: 1vh;
+}

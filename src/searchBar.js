@@ -22,7 +22,7 @@ export class Search extends React.Component {
                 query: this.refs.input.value, 
                 matches: matchArray
             }); 
-            console.log(this.state.matches); 
+            //console.log(this.state.matches); 
         }
         if(this.refs.input.value === '') {
             this.setState({
@@ -45,7 +45,7 @@ export class Search extends React.Component {
           this.getUsers(); 
           //console.log(this.state.results); 
       }
-    selectUser = (e) =>{
+    selectUser = (e) =>{ 
         console.log(e.target.textContent);
         this.setState({
             selectedUser: e.target.textContent
@@ -57,8 +57,9 @@ export class Search extends React.Component {
         return (
             <div className="selectUserContainer">
            {this.state.selectedUser && ( <div className="userSelection">{this.state.selectedUser}</div> )}
-            <div className="searchContainer">
-                <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/>
+            <div className="searchContainer" style ={this.props.style}>
+                <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/> <br/>
+                <div id="seperator"></div>
                 {this.state.users && this.state.matches.map(user => (
                 <p className="searchResult" key ={user.uid} onClick={this.selectUser}>{user.displayName}</p>
                 ))}

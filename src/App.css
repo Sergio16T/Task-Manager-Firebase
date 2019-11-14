@@ -57,6 +57,7 @@ form {
 }  
 
 .listContainer ul {
+  overflow: auto; 
   padding: 0; 
 }
 #new-todo {
@@ -82,8 +83,9 @@ flex-direction: column;
 .listItems {
   width: 50%; 
   padding: 15px; 
-  border-bottom: 1px solid #292828; 
   list-style: none; 
+  font-size: .8rem; 
+  align-self: center; 
 }
 #inputLabel {
   font-size: 1.2rem; 
@@ -94,8 +96,8 @@ flex-direction: column;
   justify-content: space-between; 
 }
 .itemContainer, .listItems, .toggleButton {
-  padding: 1vh; 
-  margin: 2vh 1vh; 
+  /*padding: 1vh; 
+  margin: 2vh 1vh; maybe delete*/ 
 }
 .wrapper {
   height: 100vh; 
