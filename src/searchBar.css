@@ -1,0 +1,25 @@
+.searchContainer {
+  text-align: center; 
+}
+.searchResult {
+
+}
+.searchResult:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#searchUserInput {
+    outline:none; 
+    width: 400px;
+    border: 1px solid #ddd;
+    height: 20px;
+    border-radius: 15px;
+    font-size: 20px; 
+    text-align: center; 
+    padding: 5px;
+}
+
+ #searchUserInput:focus {
+    border: 1px solid #0d66b9; 
+  
+  }

@@ -32,7 +32,6 @@ class App extends React.Component {
 _isMounted  = false;
 
 componentDidMount() {
-  console.log(this.params);
   this._isMounted  = true; 
   this.clickHamburger();
   window.addEventListener('resize', this.updateDimensions.bind(this));

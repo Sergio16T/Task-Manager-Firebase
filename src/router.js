@@ -32,7 +32,8 @@ function useAuth() {
                 const user = {
                     displayName: firebaseUser.displayName, 
                     photoUrl: firebaseUser.photoURL, 
-                    uid: firebaseUser.uid
+                    uid: firebaseUser.uid,
+                    email: firebaseUser.email
                 }
                 setUser(user); 
                 db.collection('users') 
@@ -77,7 +78,7 @@ function Login() {
         <div className="logInContainer">
             
             <form className="logInDiv">
-            <h2>Welcome to Task Manager</h2>
+            <h2>Welcome to TaskHub</h2>
             <motion.button 
                 type= "button"
                 id = "logInButton"

@@ -60,13 +60,18 @@ form {
   padding: 0; 
 }
 #new-todo {
-    width: 400px;
-    border: 1px solid #ddd;
-    height: 20px;
-    border-radius: 5px;
-    font-size: 20px; 
-    text-align: center; 
-    padding: 5px; 
+  outline:none; 
+  width: 400px;
+  border: 1px solid #ddd;
+  height: 20px;
+  border-radius: 15px;
+  font-size: 20px; 
+  text-align: center; 
+  padding: 5px; 
+}
+#new-todo:focus {
+  border: 1px solid #0d66b9; 
+
 }
 .listContainer {
 display: flex; 
@@ -147,15 +152,22 @@ cursor: pointer;
     height: 2px; 
     margin-bottom: 8px; 
     background-color: rgb(255, 255, 255, .8); 
+    -webkit-transition: -webkit-transform 500ms ease; 
     transition: transform 500ms ease;  
   }
   #hamburger2.active #top{
+    -webkit-transform: translateY(10px) rotate(-135deg);
+    -ms-transform: translateY(10px) rotate(-135deg);
     transform: translateY(10px) rotate(-135deg); 
   }
   #hamburger2.active #middle {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0); 
     transform: scale(0); 
   }
   #hamburger2.active #bottom {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg); 
     transform: translateY(-10px) rotate(-45deg); 
   }
   
