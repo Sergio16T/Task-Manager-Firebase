@@ -65,7 +65,7 @@ componentWillUnmount() {
         </div>
         <div className ="wrapper">
         <NavSideBar navClass ={this.state.navSideBarClassName} activeHamburger ={this.state.hamburgerClassName} user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
-        <div className='listContainer'>
+        <div className='listContainer'> {/*add event listener here and pass state via props down if clicked to close modal box's */}
         <WelcomeText homePage ={this.props.homePage}/>
         <Form homePage ={this.props.homePage} user = {this.props.user}/> 
         <TodoList user={this.props.user}/> 

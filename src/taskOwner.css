@@ -16,3 +16,13 @@
     height:4vh; 
     align-self: center; 
 }
+#selectUserAvatar {
+    cursor: pointer; 
+    align-self: center;
+    width: 50px;
+    height: 40px;
+    margin: 0 2%;
+    background-size: cover;
+    border-radius: 50%;
+
+}

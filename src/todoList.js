@@ -4,7 +4,6 @@ import './App.css';
 import './toDoList.css';
 import { db } from './App'; 
 import { useParams } from 'react-router-dom'; 
-import { Search } from './searchBar'; 
 import { TaskOwner } from './taskOwner'; 
 
 export function useCollection(user){
@@ -62,7 +61,7 @@ function TodoList(props) {
             >
             </Button>
             </div>
-            <TaskOwner/> {/* place assignTaskOwner component here.. this is where you can open search component on click as modal box */}
+            <TaskOwner profileUser ={props.user} projectId ={projectId} taskId ={item.id}/> {/* place assignTaskOwner component here.. this is where you can open search component on click as modal box */}
             </div>  
             
            
