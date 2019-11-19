@@ -10,6 +10,7 @@ import { firebaseConfig } from './firebaseConfig';
 import Form from './Form'; 
 import WelcomeText from './WelcomeText'; 
 import { AppHeader } from './AppHeader'; 
+import { SidePanelComments} from './sidePanelComments'; 
 
 firebase.initializeApp(firebaseConfig); 
 
@@ -57,7 +58,9 @@ class App extends React.Component {
         <Form homePage ={this.props.homePage} user = {this.props.user}/> 
         <TodoList user={this.props.user}/> 
         </div>
+        <SidePanelComments/>
         </div>
+        
       </div>
     );
   }
@@ -78,7 +81,6 @@ class App extends React.Component {
      
         });
       }
-      // note took this.openMenu() out changed false and true to opposites 
     }
   }
 

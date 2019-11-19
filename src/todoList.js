@@ -47,7 +47,7 @@ function TodoList(props) {
             <Button 
             index ={index} 
             taskComplete ={item.Complete} 
-            taskId ={item.id}
+            taskId ={item.id} //use this as reference for taskId to add comments collection to this task in DB and then comments doc's added. 
             projectId ={projectId}
             user = {props.user}
             >
@@ -55,6 +55,7 @@ function TodoList(props) {
             </div>
             <TaskOwner profileUser ={props.user} projectId ={projectId} taskId ={item.id}/> 
             <TaskComments/> 
+            {/* add sidePanel for each one onCommentBubble CLick move this sidePanel out in front */}
             </div>  
             
            
