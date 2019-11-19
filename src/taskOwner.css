@@ -2,18 +2,23 @@
     height: 8vh; 
     background-color: #e5f4ff;
     padding: 0px 15px; 
+    border-right: 2px solid #fff;
+    
 }
 .userButtonDiv{
     height: 100%; 
     display: flex; 
+    
 }
 #selectUserButton{
+    display: flex; 
     outline: none; 
     cursor: pointer; 
     font-size: 1.5rem; 
     background-color: #e5f4ff;
     border: none; 
     height:4vh; 
+    width: 50px; 
     align-self: center; 
 }
 #selectUserAvatar {
@@ -26,4 +31,19 @@
     background-size: cover;
     border-radius: 50%;
 
+}
+#addUserArrow {
+    z-index: 0;
+    align-self: center;
+    margin-left: -10px; 
+    position: absolute; 
+    display: none; 
+    font-size: 10px; 
+    background-color: rgb(60, 87, 240); 
+    padding: 3px; 
+    border-radius: 50%; 
+    color: white; 
+}
+#selectUserButton:hover #addUserArrow {
+    display: block; 
 }

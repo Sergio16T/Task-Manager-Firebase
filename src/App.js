@@ -9,7 +9,7 @@ import 'firebase/auth';
 import { firebaseConfig } from './firebaseConfig'; 
 import Form from './Form'; 
 import WelcomeText from './WelcomeText'; 
-
+import { AppHeader } from './AppHeader'; 
 
 firebase.initializeApp(firebaseConfig); 
 
@@ -26,46 +26,33 @@ class App extends React.Component {
       navSideBarClassName: 'navSideBar-Container'
     }
     this.openMenu = this.openMenu.bind(this); 
-    this.clickHamburger = this.clickHamburger.bind(this); 
   }
 
-_isMounted  = false;
+  _isMounted  = false;
 
-componentDidMount() {
-  this._isMounted  = true; 
-  this.clickHamburger();
-  window.addEventListener('resize', this.updateDimensions.bind(this));
-  document.addEventListener('DOMContentLoaded', this.updateDimensions.bind(this)); // this listener should be on the Document Object? 
-  
-}
+  componentDidMount() {
+    this._isMounted  = true; 
+    window.addEventListener('resize', this.updateDimensions.bind(this));
+    document.addEventListener('DOMContentLoaded', this.updateDimensions.bind(this));
+  }
 
-
-
-componentWillUnmount() {
-  this._isMounted = false; 
-  window.removeEventListener('resize', this.updateDimensions.bind(this));
-  document.removeEventListener('DOMContentLoaded', this.updateDimensions.bind(this)); 
-}
-
+  componentWillUnmount() {
+    this._isMounted = false; 
+    window.removeEventListener('resize', this.updateDimensions.bind(this));
+    document.removeEventListener('DOMContentLoaded', this.updateDimensions.bind(this)); 
+  }
 
   render() {
     return (
       <div>
-        <div className="app-header">
-        <div ref ="hamburger" id="hamburger2" className={this.state.hamburgerClassName} onClick={this.openMenu}>
-          <div id="top"></div>
-          <div id="middle"></div>
-          <div id="bottom"></div>
-        </div>
-        {/* <i ref ="hamburger" onClick = {this.openMenu} id ="hamburger" className="fas fa-bars"></i> */}
-        <h3>TaskHub</h3>
-        <div id="userPhoto" style={{backgroundImage: this.props.user ? `url(${this.props.user.photoUrl})`: ''}}></div>
-        <div id="userName">{this.props.user.displayName}</div>
-        <button onClick={() => {firebase.auth().signOut();}} id="logOutButton">Log out</button>
-        </div>
+        <AppHeader
+        hamburgerClassName ={this.state.hamburgerClassName}
+        openMenu={this.openMenu}
+        user = {this.props.user}
+        /> 
         <div className ="wrapper">
-        <NavSideBar navClass ={this.state.navSideBarClassName} activeHamburger ={this.state.hamburgerClassName} user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.clickHamburger} />
-        <div className='listContainer'> {/*add event listener here and pass state via props down if clicked to close modal box's */}
+        <NavSideBar navClass ={this.state.navSideBarClassName} activeHamburger ={this.state.hamburgerClassName} user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.openMenu} />
+        <div className='listContainer'> 
         <WelcomeText homePage ={this.props.homePage}/>
         <Form homePage ={this.props.homePage} user = {this.props.user}/> 
         <TodoList user={this.props.user}/> 
@@ -74,7 +61,6 @@ componentWillUnmount() {
       </div>
     );
   }
-  //Sets state of text to input value on change 
 
   updateDimensions =() => {
     if(this._isMounted){
@@ -97,7 +83,6 @@ componentWillUnmount() {
   }
 
   openMenu() {
-   
     if(this.state.responsive) {
       this.setState({
         responsive: false,
@@ -106,25 +91,19 @@ componentWillUnmount() {
         
       });
     } else {
-      this.setState({
-        responsive: true,
-        hamburgerClassName: 'active', 
-        navSideBarClassName: 'navSideBar-Containeractive'
-      
-      });
+        this.setState({
+          responsive: true,
+          hamburgerClassName: 'active', 
+          navSideBarClassName: 'navSideBar-Containeractive'
+        
+        });
     }
     if(this.state.width >= 800) {
-    this.setState({
-      responsive: true
-    });
+      this.setState({
+        responsive: true
+      });
+    }
   }
-
-  }
-
-  clickHamburger(){
-    this.refs.hamburger.click(); 
-  }
-
 
 }
 
@@ -132,24 +111,3 @@ componentWillUnmount() {
 export default App;
 export { firebase }; 
 
-/*
-handleSubmit(e) {
-  e.preventDefault();
-  if (!this.state.text.length) {
-    //prevent's empty text from being added to TO DO
-    return;
-  }
-  db.collection('Projects')
-  .doc()
-
-  const newItem = {
-    text: this.state.text, // grabs text from state set by handleChange(e)
-    id: Date.now()
-  };
-
-  this.setState(state => ({
-    items: state.items.concat(newItem), // taking value of state.items and using concat which returns a new array of merged (existing array containing object(s) with addition of new object)
-    text: '' // resets to empty string ready for next input to use handleChange(e)
-  }));
-}
-*/ 

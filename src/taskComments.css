@@ -1,0 +1,46 @@
+.assignCommentsDiv {
+    display: flex;
+    height: 8vh; 
+    background-color: #e5f4ff;
+    padding: 0px 15px; 
+}
+#addCommentButton {
+    outline: none; 
+    cursor: pointer;
+    background-color: #e5f4ff;
+    font-size: 30px;
+    border: none;
+    align-self: center;
+}
+
+.assignCommentsDiv .tooltiptext {
+    visibility: hidden;
+    width: 130px; 
+    background-color: black; 
+    color: #fff; 
+    text-align: center; 
+    border-radius: 6px; 
+    padding: 5px 0; 
+
+    /* position the tooltip*/ 
+    position: absolute; 
+    z-index: 1;
+    margin-top: -35px; 
+    margin-left: -45px; 
+}
+
+#addCommentButton:hover + .tooltiptext {
+    visibility: visible;
+}
+
+.assignCommentsDiv .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%; 
+    left: 50%; 
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+  

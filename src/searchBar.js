@@ -77,7 +77,9 @@ export class Search extends React.Component {
         if (this.node.contains(e.target)){
             return; 
         } else if (avatarNode.current === e.target){
-            return
+            return; 
+        }  else if (e.target.className === "fas fa-user" || e.target.id ==="selectUserButton" || e.target.id ==="addUserArrow") {
+            return 
         } else {
             this.props.closeModal(); 
         }

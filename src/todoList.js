@@ -5,6 +5,7 @@ import './toDoList.css';
 import { db } from './App'; 
 import { useParams } from 'react-router-dom'; 
 import { TaskOwner } from './taskOwner'; 
+import { TaskComments } from './taskComments'; 
 
 export function useCollection(user){
   const [items, setItems]= useState([]); 
@@ -15,6 +16,7 @@ export function useCollection(user){
     return db.collection(`users/${user.uid}/taskProjects`)
     .doc(`${projectId}`) 
     .collection('Tasks')
+    .orderBy('createdAt')
     .onSnapshot((snapshot) => {
         const tasks = []; 
         snapshot.forEach(task => {
@@ -34,16 +36,6 @@ export function useCollection(user){
 function TodoList(props) {
   const items = useCollection(props.user); 
   let { projectId } = useParams(); 
-  /*let users = getUsers(); 
-
-  async function getUsers() {
-    const snapshot = await firebase.firestore().collection('users').get(); 
-    return snapshot.docs.map(doc => doc.data()); 
-  } 
-
-  */
-
-
 
     return (
       
@@ -61,7 +53,8 @@ function TodoList(props) {
             >
             </Button>
             </div>
-            <TaskOwner profileUser ={props.user} projectId ={projectId} taskId ={item.id}/> {/* place assignTaskOwner component here.. this is where you can open search component on click as modal box */}
+            <TaskOwner profileUser ={props.user} projectId ={projectId} taskId ={item.id}/> 
+            <TaskComments/> 
             </div>  
             
            
