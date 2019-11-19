@@ -46,18 +46,23 @@ export class Search extends React.Component {
       componentDidMount() {
           this.getUsers(); 
           //console.log(this.state.results); 
+          document.addEventListener('mousedown', this.handleClick); 
+      }
+      componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClick); 
       }
      
     selectUser = (e) =>{ 
+        const {projectId, taskId, profileUser} = this.props; //nice! less code
         let userID =e.target.getAttribute('data-key'); // returns reference to user ID in DB
-        let projectId = this.props.projectId; 
+       /* let projectId = this.props.projectId; 
         let taskId = this.props.taskId; 
-        let profileUser = this.props.profileUser.uid; 
+        let profileUser = this.props.profileUser.uid; */
 
         this.setState({
             selectedUser: e.target.textContent
         }); 
-        db.collection(`users/${profileUser}/taskProjects/${projectId}/Tasks`) 
+        db.collection(`users/${profileUser.uid}/taskProjects/${projectId}/Tasks`) 
         .doc(`${taskId}`)
         .update({
             assignedUserName: e.target.textContent, 
@@ -67,13 +72,22 @@ export class Search extends React.Component {
         //need to be able to write this task to another user's db tasks need to write another db write operation to add this task to areli's firestore and update in her UI. 
       //inside here add selected user to Task in DB. Including email, displayName, and photoUrl  
     }
-
+    handleClick = (e) => {
+        let avatarNode = this.props.avatarNode; 
+        if (this.node.contains(e.target)){
+            return; 
+        } else if (avatarNode.current === e.target){
+            return
+        } else {
+            this.props.closeModal(); 
+        }
+    }
     render(){
         return (
             <div className="selectUserContainer">
            {/* this.state.selectedUser && ( <div className="userSelection">{this.state.selectedUser}</div> ) 
             instead here if state not undefined show assigned user from DB query */}
-            <div className="searchContainer" style ={this.props.style}>
+            <div className="searchContainer" style ={this.props.style} ref ={node => this.node = node}>
                 <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/> <br/>
                 <div id="seperator"></div>
                 {this.state.users && this.state.matches.map(user => (

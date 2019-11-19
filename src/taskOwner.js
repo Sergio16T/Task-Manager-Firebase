@@ -16,6 +16,9 @@ export function TaskOwner(props) {
             setModal(false)
         }
     }
+    const closeModal = () => {
+        setModal(false); 
+    }
     useEffect(()=> {
         //db query here for task user if assigned? 
         let queryUser; 
@@ -27,7 +30,7 @@ export function TaskOwner(props) {
             let result = {...userData};    
             
             if(isSubsribed) {
-                console.log('async1', result); 
+                //console.log('async1', result); 
                 setQueryUser(result.assignedUserId); 
                 queryUser = result.assignedUserId;          
             }
@@ -40,22 +43,24 @@ export function TaskOwner(props) {
     async function getUserData() { 
        let query = await db.collection('users').doc(`${queryUser}`).get(); 
        let userData = query.data(); 
-       console.log('async2', userData); 
+       //console.log('async2', userData); 
        setUserPhoto(userData.photoUrl); 
     }
     return () => isSubsribed = false; 
     // let userData = getTaskData(); 
      
     }); 
-
+    let avatarNode = React.createRef(); 
     return (
         <div className="assignTaskDiv">
             <div className="userButtonDiv">
-            {userPhoto && queryUser ? (<button id="selectUserAvatar" onClick={openModal} style ={{backgroundImage: `url(${userPhoto})`}}></button>) : 
+            {userPhoto && queryUser ? (<button id="selectUserAvatar" ref={avatarNode} onClick={openModal} style ={{backgroundImage: `url(${userPhoto})`}}></button>) : 
             (<button id="selectUserButton" onClick={openModal}><i className="fas fa-user"></i></button>)}
                {/* add conditional here if db has user assigned to task*/}
             </div> 
             <Search 
+            avatarNode = {avatarNode}
+            closeModal = {closeModal}
             toggleModal = {openModal}
             queryUser = {queryUser} 
             profileUser = {props.profileUser} 

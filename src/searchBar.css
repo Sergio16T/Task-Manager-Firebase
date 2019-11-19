@@ -4,6 +4,7 @@
 }
 
 .searchContainer {
+    overflow: auto; 
     display: none; 
     padding: 15px; 
     border-radius: 15px; 
@@ -43,7 +44,7 @@
     margin: 20px auto; 
     background-color: #0d66b9
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .searchContainer{
         left: 8vh; 
     }

@@ -3,11 +3,25 @@ import './modalBox.css';
 
 class ModalBox extends React.Component {
 
+    componentDidMount(){
+        document.addEventListener('mousedown', this.handleClick); 
+    }
+    componentWillUnmount(){
+        document.removeEventListener('mousedown', this.handleClick); 
+    }
+    handleClick = (e) => {
+        if (this.node.contains(e.target)) {
+            return 
+        } else {
+            this.props.buttonMethod(); 
+        }
+    }
+
     render() {
         return (
             <div className = {this.props.className}>
                 <div className="modal-container">
-                <form id="modal-form">
+                <form id="modal-form" ref={n => this.node = n}>
                     <header id="modal-header">
                         <p id="header-message">Add Project</p>
                     </header>

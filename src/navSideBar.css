@@ -60,6 +60,7 @@
 
 @media screen and (max-width: 800px) {
     .navSideBar-Container {
+        z-index: 1;
         left: -210px; 
         position: absolute;
         height: 100vh;
@@ -69,6 +70,7 @@
         transition: all 350ms ease-in; 
     }
     .navSideBar-Containeractive{
+        z-index: 1;
         width: 210px; 
         position: absolute; 
         left: 0; 

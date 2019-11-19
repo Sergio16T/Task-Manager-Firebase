@@ -17,6 +17,7 @@
     align-self: center; 
 }
 #selectUserAvatar {
+    outline: none; 
     cursor: pointer; 
     align-self: center;
     width: 50px;
