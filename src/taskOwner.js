@@ -57,7 +57,6 @@ export function TaskOwner(props) {
             <div className="userButtonDiv">
             {userPhoto && queryUser ? (<button id="selectUserAvatar" ref={avatarNode} onClick={openModal} style ={{backgroundImage: `url(${userPhoto})`}}></button>) : 
             (<button id="selectUserButton" onClick={openModal}><i className="fas fa-plus" id="addUserArrow"></i><i className="fas fa-user"></i></button>)}
-               {/* add conditional here if db has user assigned to task*/}
             </div> 
             <Search 
             avatarNode = {avatarNode}

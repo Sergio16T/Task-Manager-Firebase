@@ -78,7 +78,7 @@ function Login() {
         <div className="logInContainer">
             
             <form className="logInDiv">
-            <h2>Welcome to TaskHub</h2>
+            <h2 id="welcomeBanner">Welcome to TaskHub</h2>
             <motion.button 
                 type= "button"
                 id = "logInButton"

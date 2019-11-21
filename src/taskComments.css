@@ -30,6 +30,7 @@
 }
 
 #addCommentButton:hover + .tooltiptext {
+    z-index: 0;
     visibility: visible;
 }
 
@@ -44,3 +45,10 @@
     border-color: black transparent transparent transparent;
   }
   
+  @media screen and (max-width: 450px) {
+
+.assignCommentsDiv{
+    height: 9vh; 
+}
+
+  }

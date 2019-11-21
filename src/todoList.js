@@ -53,18 +53,19 @@ function TodoList(props) {
             >
             </Button>
             </div>
-            <TaskOwner profileUser ={props.user} projectId ={projectId} taskId ={item.id}/> 
-            <TaskComments/> 
-            {/* add sidePanel for each one onCommentBubble CLick move this sidePanel out in front */}
-            </div>  
-            
-           
-          
-        ))}
-          
+            <TaskOwner 
+            profileUser ={props.user} 
+            projectId ={projectId} 
+            taskId ={item.id}  
+            /> 
+            <TaskComments
+            itemId = {item.id}
+            toggleSidePanel = {props.toggleSidePanel.bind(this, item.id)}
+            /> 
+            </div>     
+        ))}   
       </ul>
-      
-      
+
     );
   
 }
@@ -72,13 +73,3 @@ function TodoList(props) {
 
 export default TodoList; 
 
-
-/*
-<div className="itemDiv">
-<select className ="selectUser">
-{users.map(user => (
-  <option key ={user.uid}>{user.displayName}</option>
-))}
-</select> 
-</div>
-*/ 

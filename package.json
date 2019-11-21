@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.8.0",
     "firebase": "^7.2.3",
     "framer-motion": "^1.6.14",
     "react": "^16.10.2",

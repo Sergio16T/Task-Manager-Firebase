@@ -24,7 +24,9 @@ class App extends React.Component {
       responsive: true,
       width: window.innerWidth,
       hamburgerClassName: '', 
-      navSideBarClassName: 'navSideBar-Container'
+      navSideBarClassName: 'navSideBar-Container',
+      sidePanelCommentsIsOpen: 'sidePanel', 
+      taskId : ''
     }
     this.openMenu = this.openMenu.bind(this); 
   }
@@ -52,17 +54,48 @@ class App extends React.Component {
         user = {this.props.user}
         /> 
         <div className ="wrapper">
-        <NavSideBar navClass ={this.state.navSideBarClassName} activeHamburger ={this.state.hamburgerClassName} user = {this.props.user} responsive ={this.state.responsive} clickHam ={this.openMenu} />
+        <NavSideBar 
+        navClass ={this.state.navSideBarClassName} 
+        activeHamburger ={this.state.hamburgerClassName} 
+        user = {this.props.user} 
+        responsive ={this.state.responsive} 
+        clickHam ={this.openMenu} 
+        />
         <div className='listContainer'> 
         <WelcomeText homePage ={this.props.homePage}/>
         <Form homePage ={this.props.homePage} user = {this.props.user}/> 
-        <TodoList user={this.props.user}/> 
+        <TodoList 
+        user={this.props.user} 
+        toggleSidePanel={this.toggleSidePanel} 
+        sidePanelClassName={this.state.sidePanelCommentsIsOpen}
+        />  
         </div>
-        <SidePanelComments/>
+        <SidePanelComments 
+        user = {this.props.user}
+        toggleSidePanel={this.toggleSidePanel} 
+        sidePanelClassName={this.state.sidePanelCommentsIsOpen}
+        taskId={this.state.taskId}
+        />
         </div>
         
       </div>
     );
+  }
+
+  toggleSidePanel = (itemId) => {
+    if(this.state.sidePanelCommentsIsOpen === 'sidePanel') {
+      this.setState({
+        sidePanelCommentsIsOpen: 'sidePanelActive', 
+        taskId: itemId
+      
+      }); 
+    } else {
+      this.setState({
+        sidePanelCommentsIsOpen: 'sidePanel',
+        taskId: itemId
+      }); 
+    }
+    
   }
 
   updateDimensions =() => {

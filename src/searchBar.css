@@ -14,7 +14,7 @@
     height: 20%; 
     background-color: #fff; 
     box-shadow: .5px 1px 1px 1px rgba(95, 95, 99, 0.425); 
-    left: 35vh; 
+    left: 50vw; 
 }
 .searchResult:hover {
     text-decoration: underline;

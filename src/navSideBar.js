@@ -39,10 +39,12 @@ class NavSideBar extends React.Component {
               }); 
             }); 
             this.setState({
-              projects: docs
+              projects: docs, 
             }); 
-          }) 
+          })
     }
+  
+
     rotateArrow() {
         if (this.state.rightArrowClassName === 'right-arrow'){
             this.setState({
@@ -66,7 +68,7 @@ class NavSideBar extends React.Component {
             modalBoxClassName: "modalBox inactive",
         })
     }
-    addProject() { //need to add to database 
+    addProject() { 
         if (!this.state.text.length | !this.state.priorityText.length) {
             return; 
         }
@@ -103,7 +105,7 @@ class NavSideBar extends React.Component {
                 text = {this.state.text}
                 priorityText = {this.state.priorityText}
             />
-            <div /*style ={{opacity: this.props.responsive ? 1 : 0}}*/ className ={this.props.navClass}>
+            <div className ={this.props.navClass}>
                 <div className='panel-wrapper'>
                 <div className ="expansionPanel">
                     <header id="navSideBar-header">
@@ -114,10 +116,6 @@ class NavSideBar extends React.Component {
                     <ul className= {this.state.projectListClassName}>
                         {this.state.projects && this.state.projects.map(project => (
                             <Link to ={`/Projects/${project.id}`} key={project.id} onClick={this.props.clickHam}><li className="project-item">{project.id}</li></Link>
-                        /*
-                        <ul>
-                            <a href={`/Projects/${project.id}`}>{project.id}</a>
-                            </ul> */ 
                         ))}
                         
                     </ul>
@@ -135,4 +133,4 @@ class NavSideBar extends React.Component {
 export default NavSideBar; 
 
 
-//expansionPanel needs it's own component & module reduce lines of codein this module
+//expansionPanel needs it's own component & module reduce lines of code in this module

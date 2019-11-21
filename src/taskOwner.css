@@ -11,6 +11,7 @@
     
 }
 #selectUserButton{
+    position: relative;
     display: flex; 
     outline: none; 
     cursor: pointer; 
@@ -46,4 +47,11 @@
 }
 #selectUserButton:hover #addUserArrow {
     display: block; 
+}
+@media screen and (max-width: 450px){
+
+.assignTaskDiv {
+    height: 9vh; 
+}
+
 }

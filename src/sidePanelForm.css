@@ -1,0 +1,43 @@
+#submitCommentButton {
+    align-self: flex-end;
+    background-color: #7fffd4;
+    border-radius: 30px;
+    width: 100px; 
+    padding: 10px 20px;
+    margin: 0vh 2vh; 
+    color: #333; 
+    outline: none; 
+    border: none; 
+    cursor: pointer;
+    font-size: .8rem; 
+ 
+    margin: 1vh 0; 
+}
+
+#addCommentInput {
+    outline:none; 
+    width: 100%; 
+    margin: 0 2vh; 
+    border: 1px solid #ddd;
+    height: 20px;
+    border-radius: 15px;
+    font-size: 20px; 
+    text-align: center; 
+    padding: 5px; 
+}
+#addCommentInput:focus {
+    height: 50px; 
+}
+  
+#addCommentInput:focus + #submitCommentButton {
+    display: block; 
+}
+#addCommentInput:focus {
+    border: 1px solid #0d66b9; 
+  
+}
+#sidePanelForm {
+    display: flex; 
+    flex-direction: column; 
+    width: 80%; 
+}

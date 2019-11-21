@@ -24,7 +24,7 @@ export class Search extends React.Component {
                 query: this.refs.input.value, 
                 matches: matchArray
             }); 
-            //console.log(this.state.matches); 
+            
         }
         if(this.refs.input.value === '') {
             this.setState({
@@ -45,7 +45,6 @@ export class Search extends React.Component {
      
       componentDidMount() {
           this.getUsers(); 
-          //console.log(this.state.results); 
           document.addEventListener('mousedown', this.handleClick); 
       }
       componentWillUnmount() {
@@ -87,8 +86,6 @@ export class Search extends React.Component {
     render(){
         return (
             <div className="selectUserContainer">
-           {/* this.state.selectedUser && ( <div className="userSelection">{this.state.selectedUser}</div> ) 
-            instead here if state not undefined show assigned user from DB query */}
             <div className="searchContainer" style ={this.props.style} ref ={node => this.node = node}>
                 <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/> <br/>
                 <div id="seperator"></div>

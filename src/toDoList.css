@@ -19,3 +19,11 @@
     border-radius: 15px;
     margin: 1vh;
 }
+
+@media screen and (max-width: 450px) {
+
+.taskRow {
+    height: 9vh; 
+}
+
+}
