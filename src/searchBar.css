@@ -1,20 +1,19 @@
 .selectUserContainer {
     text-align: center; 
-  
 }
-
 .searchContainer {
     overflow: auto; 
     display: none; 
     padding: 15px; 
     border-radius: 15px; 
-    margin-top: 10px; 
+    margin-top: -65px; 
+    margin-left: -20px; 
     position: absolute;
     z-index: 1;
-    height: 20%; 
+    height: 200px; 
     background-color: #fff; 
     box-shadow: .5px 1px 1px 1px rgba(95, 95, 99, 0.425); 
-    left: 50vw; 
+
 }
 .searchResult:hover {
     text-decoration: underline;
@@ -43,9 +42,4 @@
     height: 2px; 
     margin: 20px auto; 
     background-color: #0d66b9
-}
-@media screen and (max-width: 450px) {
-    .searchContainer{
-        left: 8vh; 
-    }
 }

@@ -53,15 +53,10 @@ h3 {
   color: rgba(248, 248, 248, 0.8); 
 }
 
-/* form { 
-  margin: 2vh; 
-}  */ 
-
 #addTaskForm {
   margin: 2vh; 
 }
 .listContainer ul {
-  overflow: auto; 
   padding: 0; 
 }
 #new-todo {
@@ -79,9 +74,9 @@ h3 {
 
 }
 .listContainer {
-display: flex; 
-flex-direction: column; 
-/*align-items: center; */
+  overflow: auto; 
+  display: flex; 
+  flex-direction: column; 
 
 }
 .listItems {

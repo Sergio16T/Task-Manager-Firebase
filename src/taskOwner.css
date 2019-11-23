@@ -1,9 +1,9 @@
 .assignTaskDiv {
     height: 8vh; 
+    position: relative;
     background-color: #e5f4ff;
     padding: 0px 15px; 
-    border-right: 2px solid #fff;
-    
+    border-right: 2px solid #fff;   
 }
 .userButtonDiv{
     height: 100%; 

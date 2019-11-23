@@ -1,5 +1,6 @@
 .assignCommentsDiv {
     display: flex;
+    position: relative;
     height: 8vh; 
     background-color: #e5f4ff;
     padding: 0px 15px; 
