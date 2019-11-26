@@ -11,42 +11,106 @@ export function SidePanelComments(props) {
     const [comments, setComments] = useState([]); 
     const { projectId } = useParams(); 
     const [text, setText] = useState(''); 
-    
-    
-   
+    const [assignedUser, setAssignedUser] = useState(''); 
+    const [author, setAuthor] = useState(''); 
+    const [commentsComplete, setComplete] = useState(false); 
 
-    useEffect(()=> {
+    useEffect(()=> { 
+        //console.log('profileUser', props.user.uid)   
+        let result = {}; 
+        let taskData = {}; 
         async function setArguments() {
             await setTaskId(props.taskId.toString()); 
+        }
+        
+        async function getTaskAuthor() {
+            await db.collection(`users/${props.user.uid}/taskProjects`)
+            .doc(`${projectId}`)
+            .collection('Tasks')
+            .doc(`${taskId}`).get()
+            .then(snapshot => {
+                taskData = {...snapshot.data()}
+            }); 
+            setAuthor(taskData.author); 
+            
         } 
-        setArguments(); 
-        setComments([]); 
-
-        if (taskId !== '') {
-            return db.collection(`users/${props.user.uid}/taskProjects`)
+        async function getAssignedUser() {
+            await db.collection(`users/${props.user.uid}/taskProjects`)
+            .doc(`${projectId}`)
+            .collection('Tasks')
+            .doc(`${taskId}`).get()
+            .then(snapshot => {
+                result ={...snapshot.data()}; 
+            }); 
+            setAssignedUser(result.assignedUserId); 
+        }
+        const setUserComments = async (userId, projectId, taskId) => {
+            await db.collection(`users/${userId}/taskProjects`)
             .doc(`${projectId}`) 
             .collection('Tasks')
             .doc(`${taskId}`)
             .collection('Comments')
             .orderBy('createdAt')
             .onSnapshot((snapshot) => {
-                const comments = []; 
+                const comments = [];
                 snapshot.forEach(comment => {
                     comments.push({
-                        ...comment.data(),
+                        data: comment.data(),
                         id: comment.id
                     }); 
                 }); 
                 setComments(comments);
-                //console.log(comments);  
-                });   
+                //console.log('setComments', comments); 
+                setComplete(true);  
+                if (commentsComplete && assignedUser!== props.user.uid){
+                    comments.forEach(comment => {
+                        db.collection(`users/${assignedUser}/taskProjects`)
+                        .doc(`${projectId}`) 
+                        .collection('Tasks')
+                        .doc(`${taskId}`)
+                        .collection('Comments')
+                        .doc(comment.id)
+                        .set({...comment.data})
+                    })
+                    //console.log('update');   
+                }
+                if (commentsComplete && author && author !== props.user.uid) {
+                    comments.forEach(comment => {
+                        db.collection(`users/${author}/taskProjects`)
+                        .doc(`${projectId}`) 
+                        .collection('Tasks')
+                        .doc(`${taskId}`)
+                        .collection('Comments')
+                        .doc(comment.id)
+                        .set({...comment.data})
+                    })
+                }
+            }); 
         }
-        
-    },[props.taskId, projectId, props.user.uid, taskId])
+     
+        setArguments(); 
+        setComments([]); 
 
-    const submitComment = (comment) => {
-        if(taskId !== '') {
-        db.collection(`users/${props.user.uid}/taskProjects`)
+        if (taskId !== '') {
+            getAssignedUser();
+            //console.log(assignedUser);                
+        }
+        if (taskId !== '' && assignedUser){
+            setUserComments(props.user.uid, projectId, taskId);  
+            getTaskAuthor();  
+            //console.log('author', author);        
+        }
+    
+        
+    },[props.taskId, projectId, props.user.uid, taskId, assignedUser, commentsComplete, author])
+
+
+    const submitComment = async (comment) => {
+        if (comment === '') {
+            return; 
+        }
+        if(taskId !== '' && assignedUser) {
+        await db.collection(`users/${props.user.uid}/taskProjects`)
         .doc(`${projectId}`) 
         .collection('Tasks')
         .doc(`${taskId}`)
@@ -58,8 +122,12 @@ export function SidePanelComments(props) {
             authorId: props.user.uid, 
             authorPhoto: props.user.photoUrl
         }); 
-        }
-        setText(''); 
+         
+        //console.log('submit', comments);  
+        } 
+
+        setText('');  
+   
     }
 
     const handleChange = (e) => {
@@ -84,12 +152,12 @@ export function SidePanelComments(props) {
                 {comments && comments.map((comment, index) => (
                     <div className="commentContainer" key={index}>
                         <div className="commentAuthor">
-                            <div id="authorPhoto" style ={{backgroundImage: `url(${comment.authorPhoto})`}}></div>
-                            <p id="authorLabel">{comment.author}</p>
-                            <p id="timeLabel">{formatDate(comment.createdAt.seconds * 1000, 'h:mm aaa')}</p> 
+                            <div id="authorPhoto" style ={{backgroundImage: `url(${comment.data.authorPhoto})`}}></div>
+                            <p id="authorLabel">{comment.data.author}</p>
+                            <p id="timeLabel">{formatDate(comment.data.createdAt.seconds * 1000, 'h:mm aaa')}</p> 
                         </div>
-                        <li className="commentItem" key={comment.id}>{comment.Comment}</li>
-                        <p id="dateLabel">Created on {new Date(comment.createdAt.seconds * 1000).toLocaleDateString()}</p>
+                        <li className="commentItem" key={comment.id}>{comment.data.Comment}</li>
+                        <p id="dateLabel">Created on {new Date(comment.data.createdAt.seconds * 1000).toLocaleDateString()}</p>
                     </div>
                     
                 ))}

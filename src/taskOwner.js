@@ -8,6 +8,7 @@ export function TaskOwner(props) {
     const [modalIsOpen, setModal] = useState(false); 
     const [queryUser, setQueryUser] = useState([]); 
     const [userPhoto, setUserPhoto] = useState([]); 
+    
 
     const openModal =() => {
         if(modalIsOpen === false) {
@@ -19,26 +20,34 @@ export function TaskOwner(props) {
     const closeModal = () => {
         setModal(false); 
     }
-    useEffect(()=> {
-        //db query here for task user if assigned? 
+    let resultObject = {}; 
+    
+
+    useEffect(()=> { // add dependencyArray? 
         let queryUser; 
-        let isSubsribed = true; 
+        let isSubscribed = true; 
         async function getTaskData() { 
-            let query = await db.collection(`users/${props.profileUser.uid}/taskProjects/${props.projectId}/Tasks`) 
-                        .doc(`${props.taskId}`).get(); 
-            let userData = query.data(); 
-            let result = {...userData};    
+            let result = {}; 
+            await db.collection(`users/${props.profileUser.uid}/taskProjects/${props.projectId}/Tasks`) 
+                        .doc(`${props.taskId}`).get()
+                        .then(snapShot => 
+                            result = {...snapShot.data()}
+                            ); 
             
-            if(isSubsribed) {
+
+            if(isSubscribed) {
                 //console.log('async1', result); 
-                setQueryUser(result.assignedUserId); 
+                setQueryUser(result.assignedUserId);    
+                Object.assign(resultObject, result); 
+                //console.log(resultObject); 
                 queryUser = result.assignedUserId;          
             }
             if(queryUser) {
                 getUserData(); 
             }
+          
     }
-     getTaskData(); 
+    getTaskData(); 
     
     async function getUserData() { 
        let query = await db.collection('users').doc(`${queryUser}`).get(); 
@@ -46,10 +55,11 @@ export function TaskOwner(props) {
        //console.log('async2', userData); 
        setUserPhoto(userData.photoUrl); 
     }
-    return () => isSubsribed = false; 
-    // let userData = getTaskData(); 
+    
+    return () => isSubscribed = false; 
      
     }); 
+
     let avatarNode = React.createRef(); 
     
     return (
@@ -58,7 +68,8 @@ export function TaskOwner(props) {
             {userPhoto && queryUser ? (<button id="selectUserAvatar" ref={avatarNode} onClick={openModal} style ={{backgroundImage: `url(${userPhoto})`}}></button>) : 
             (<button id="selectUserButton" onClick={openModal}><i className="fas fa-plus" id="addUserArrow"></i><i className="fas fa-user"></i></button>)}
             </div> 
-            <Search 
+            <Search
+            taskData = {resultObject}
             avatarNode = {avatarNode}
             closeModal = {closeModal}
             toggleModal = {openModal}

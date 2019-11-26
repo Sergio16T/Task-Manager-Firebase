@@ -51,6 +51,7 @@
 @media screen and (max-width: 450px){
 
 .assignTaskDiv {
+    position: inherit; 
     height: 9vh; 
 }
 

@@ -10,12 +10,13 @@ export class Search extends React.Component {
             query: '',
             users: [], 
             matches: [],
-            selectedUser: ''
+            selectedUser: '', 
+            comments: []
         }
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.getUsers = this.getUsers.bind(this); 
         this.selectUser = this.selectUser.bind(this); 
-
+        this.taskData = this.props.taskData; 
     }
     handleInputChange() {
         const matchArray = findMatches(this.refs.input.value, this.state.users);
@@ -50,13 +51,14 @@ export class Search extends React.Component {
       componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClick); 
       }
+      /*
+      componentDidUpdate() {
+          console.log(this.taskData)
+      } */ 
      
     selectUser = (e) =>{ 
         const {projectId, taskId, profileUser} = this.props; //nice! less code
         let userID =e.target.getAttribute('data-key'); // returns reference to user ID in DB
-       /* let projectId = this.props.projectId; 
-        let taskId = this.props.taskId; 
-        let profileUser = this.props.profileUser.uid; */
 
         this.setState({
             selectedUser: e.target.textContent
@@ -65,12 +67,52 @@ export class Search extends React.Component {
         .doc(`${taskId}`)
         .update({
             assignedUserName: e.target.textContent, 
-            assignedUserId: userID  
+            assignedUserId: userID,
+           // author: this.taskData.author //? 
+        });
+
+        db.collection(`users/${userID}/taskProjects`)
+        .doc(`${projectId}`)
+        .update({
+          request: `requested task from ${profileUser.displayName}`
         }); 
+        if(this.taskData.length) {
+            db.collection(`users/${userID}/taskProjects`)
+            .doc(`${projectId}`)
+            .collection(`Tasks`)
+            .doc(`${taskId}`)
+            .set({...this.taskData});
+        }
+        async function getComments() {
+            let comments = []; 
+            if (comments.length) {
+                return; // try 
+            }
+            let taskCollectionRef = db.collection(`users/${profileUser.uid}/taskProjects/${projectId}/Tasks`)
+                                    .doc(`${taskId}`).collection('Comments');   
+            await taskCollectionRef.get().then(snapshot => 
+                snapshot.forEach(doc => {
+                    comments.push({
+                        data: doc.data(), 
+                        commentId: doc.id
+                    })
+                })); 
+                //console.log(comments); 
+                let commentCollectionRef= db.collection(`users/${userID}/taskProjects/${projectId}/Tasks`)
+                .doc(`${taskId}`).collection('Comments'); 
+
+                comments.forEach(comment => {
+                    commentCollectionRef.doc(comment.commentId).set(comment.data); 
+                }); 
+                    
+                
+                
+        }
+        getComments(); 
+        
         this.props.toggleModal(); 
-        //need to be able to write this task to another user's db tasks need to write another db write operation to add this task to areli's firestore and update in her UI. 
-      //inside here add selected user to Task in DB. Including email, displayName, and photoUrl  
     }
+
     handleClick = (e) => {
         let avatarNode = this.props.avatarNode; 
         if (this.node.contains(e.target)){

@@ -26,7 +26,7 @@ class App extends React.Component {
       hamburgerClassName: '', 
       navSideBarClassName: 'navSideBar-Container',
       sidePanelCommentsIsOpen: 'sidePanel', 
-      taskId : ''
+      taskId : '',
     }
     this.openMenu = this.openMenu.bind(this); 
   }
@@ -70,7 +70,7 @@ class App extends React.Component {
         sidePanelClassName={this.state.sidePanelCommentsIsOpen}
         />  
         </div>
-        <SidePanelComments 
+        <SidePanelComments
         user = {this.props.user}
         toggleSidePanel={this.toggleSidePanel} 
         sidePanelClassName={this.state.sidePanelCommentsIsOpen}
@@ -87,6 +87,7 @@ class App extends React.Component {
       this.setState({
         sidePanelCommentsIsOpen: 'sidePanelActive', 
         taskId: itemId
+
       
       }); 
     } else {

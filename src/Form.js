@@ -21,7 +21,8 @@ export default function Form(props) {
       .add({
         Task: text, // grabs text from state set by handleChange(e)
         createdAt: Date.now(),
-        Complete: false
+        Complete: false,
+        author: props.user.uid
       });
     
       setText(''); // resets to empty string ready for next input to use handleChange(e)
