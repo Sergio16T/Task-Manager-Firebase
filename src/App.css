@@ -75,8 +75,6 @@ h3 {
 }
 .listContainer {
   overflow: auto; 
-  display: flex; 
-  flex-direction: column; 
 
 }
 .listItems {

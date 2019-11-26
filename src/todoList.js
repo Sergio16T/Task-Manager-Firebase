@@ -39,7 +39,7 @@ function TodoList(props) {
 
     return (
       
-      <ul>
+      <ul className="unorderedListWrapper">
         {items.map((item, index) => (
             <div key ={item.id} className="taskRow">
           <div key = {`${index}a`} className ='itemContainer'>

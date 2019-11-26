@@ -1,4 +1,6 @@
-
+.unorderedListWrapper {
+    margin: 7vh 0; 
+}
 .itemContainer {
     background-color: #e5f4ff;
     flex-basis: 340px; 
