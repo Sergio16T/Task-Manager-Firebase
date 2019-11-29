@@ -48,12 +48,12 @@ export function TaskOwner(props) {
           
     }
     getTaskData(); 
-    
-    async function getUserData() { 
-       let query = await db.collection('users').doc(`${queryUser}`).get(); 
-       let userData = query.data(); 
+
+    async function getUserData() {
+        let query = await db.collection('users').doc(`${queryUser}`).get(); 
+        let userData = query.data(); 
        //console.log('async2', userData); 
-       setUserPhoto(userData.photoUrl); 
+        setUserPhoto(userData.photoUrl); 
     }
     
     return () => isSubscribed = false; 

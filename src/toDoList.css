@@ -1,5 +1,6 @@
 .unorderedListWrapper {
-    margin: 7vh 0; 
+    margin-top: 7vh; 
+    margin-bottom: 25vh;  
 }
 .itemContainer {
     background-color: #e5f4ff;

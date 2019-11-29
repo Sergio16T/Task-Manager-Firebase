@@ -16,8 +16,6 @@
 
 #addCommentInput {
     outline:none; 
-    width: 100%; 
-    margin: 0 2vh; 
     border: 1px solid #ddd;
     height: 20px;
     border-radius: 15px;
@@ -38,6 +36,7 @@
 }
 #sidePanelForm {
     display: flex; 
+    margin: 2vh 0; 
     flex-direction: column; 
     width: 80%; 
 }

@@ -46,38 +46,37 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <AppHeader
-        hamburgerClassName ={this.state.hamburgerClassName}
-        openMenu={this.openMenu}
-        user = {this.props.user}
-        /> 
-        <div className ="wrapper">
-        <NavSideBar 
-        navClass ={this.state.navSideBarClassName} 
-        activeHamburger ={this.state.hamburgerClassName} 
-        user = {this.props.user} 
-        responsive ={this.state.responsive} 
-        clickHam ={this.openMenu} 
-        />
-        <div className='listContainer'> 
-        <WelcomeText homePage ={this.props.homePage}/>
-        <Form homePage ={this.props.homePage} user = {this.props.user}/> 
-        <TodoList 
-        user={this.props.user} 
-        toggleSidePanel={this.toggleSidePanel} 
-        sidePanelClassName={this.state.sidePanelCommentsIsOpen}
-        />  
-        </div>
-        <SidePanelComments
-        user = {this.props.user}
-        toggleSidePanel={this.toggleSidePanel} 
-        sidePanelClassName={this.state.sidePanelCommentsIsOpen}
-        taskId={this.state.taskId}
-        />
-        </div>
-        
+    return (  
+      <div className ="wrapper">
+      <AppHeader
+      hamburgerClassName ={this.state.hamburgerClassName}
+      openMenu={this.openMenu}
+      user = {this.props.user}
+      /> 
+      <div className ="horizontalWrapper">
+      <NavSideBar 
+      navClass ={this.state.navSideBarClassName} 
+      activeHamburger ={this.state.hamburgerClassName} 
+      user = {this.props.user} 
+      responsive ={this.state.responsive} 
+      clickHam ={this.openMenu} 
+      />
+      <div className='listContainer'> 
+      <WelcomeText homePage ={this.props.homePage}/>
+      <Form homePage ={this.props.homePage} user = {this.props.user}/> 
+      <TodoList 
+      user={this.props.user} 
+      toggleSidePanel={this.toggleSidePanel} 
+      sidePanelClassName={this.state.sidePanelCommentsIsOpen}
+      />  
+      </div>
+      </div>
+      <SidePanelComments
+      user = {this.props.user}
+      toggleSidePanel={this.toggleSidePanel} 
+      sidePanelClassName={this.state.sidePanelCommentsIsOpen}
+      taskId={this.state.taskId}
+      />
       </div>
     );
   }
@@ -106,13 +105,12 @@ class App extends React.Component {
       });
       if (this.state.width < 800){
         this.setState({
-          responsive: false,
+          responsive: false
         });
       }
       if (this.state.width >= 800){
         this.setState({
-          responsive: true,
-     
+          responsive: true
         });
       }
     }

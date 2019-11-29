@@ -74,6 +74,8 @@ h3 {
 
 }
 .listContainer {
+  width: 100%; 
+  margin-top: 2vh; 
   overflow: auto; 
 
 }
@@ -98,6 +100,11 @@ h3 {
   display: flex; 
   position: relative;
   overflow: hidden; 
+  flex-direction: column; 
+}
+.horizontalWrapper{
+  display: flex; 
+  height: 100vh; 
 }
 #hamburger {
   display: none; 
