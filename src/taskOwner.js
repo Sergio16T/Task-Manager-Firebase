@@ -20,7 +20,7 @@ export function TaskOwner(props) {
     const closeModal = () => {
         setModal(false); 
     }
-    let resultObject = {}; 
+    //let resultObject = {}; 
     
 
     useEffect(()=> { // add dependencyArray? 
@@ -33,13 +33,12 @@ export function TaskOwner(props) {
                         .then(snapShot => 
                             result = {...snapShot.data()}
                             ); 
-            
 
             if(isSubscribed) {
                 //console.log('async1', result); 
                 setQueryUser(result.assignedUserId);    
-                Object.assign(resultObject, result); 
-                //console.log(resultObject); 
+                //Object.assign(resultObject, result); 
+                //console.log('resultObject', resultObject); 
                 queryUser = result.assignedUserId;          
             }
             if(queryUser) {
@@ -69,7 +68,6 @@ export function TaskOwner(props) {
             (<button id="selectUserButton" onClick={openModal}><i className="fas fa-plus" id="addUserArrow"></i><i className="fas fa-user"></i></button>)}
             </div> 
             <Search
-            taskData = {resultObject}
             avatarNode = {avatarNode}
             closeModal = {closeModal}
             toggleModal = {openModal}

@@ -59,6 +59,7 @@ function TodoList(props) {
             taskId ={item.id}  
             /> 
             <TaskComments
+            user = {props.user}
             itemId = {item.id}
             toggleSidePanel = {props.toggleSidePanel.bind(this, item.id)}
             /> 

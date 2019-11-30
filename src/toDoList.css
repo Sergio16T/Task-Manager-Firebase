@@ -28,5 +28,7 @@
 .taskRow {
     height: 9vh; 
 }
-
+.itemContainer {
+    padding-right: 10px; 
+}
 }

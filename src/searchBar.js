@@ -16,7 +16,7 @@ export class Search extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this); 
         this.getUsers = this.getUsers.bind(this); 
         this.selectUser = this.selectUser.bind(this); 
-        this.taskData = this.props.taskData; 
+        this.result = []; 
     }
     handleInputChange() {
         const matchArray = findMatches(this.refs.input.value, this.state.users);
@@ -51,13 +51,26 @@ export class Search extends React.Component {
       componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClick); 
       }
-      /*
-      componentDidUpdate() {
-          console.log(this.taskData)
-      } */ 
      
+    getTaskDataToUser = async (userID) => { 
+        const {projectId, taskId, profileUser} = this.props;
+        let result = {}; 
+        await db.collection(`users/${profileUser.uid}/taskProjects/${projectId}/Tasks`) 
+                    .doc(`${taskId}`).get()
+                    .then(snapShot => 
+                        result = {...snapShot.data()}
+                        ); 
+        this.result = result; 
+        //console.log(this.result); 
+        db.collection(`users/${userID}/taskProjects`)
+        .doc(`${projectId}`)
+        .collection(`Tasks`)
+        .doc(`${taskId}`)
+        .set({...this.result});
+    }
+
     selectUser = (e) =>{ 
-        const {projectId, taskId, profileUser} = this.props; //nice! less code
+        const {projectId, taskId, profileUser} = this.props; 
         let userID =e.target.getAttribute('data-key'); // returns reference to user ID in DB
 
         this.setState({
@@ -68,7 +81,6 @@ export class Search extends React.Component {
         .update({
             assignedUserName: e.target.textContent, 
             assignedUserId: userID,
-           // author: this.taskData.author //? 
         });
 
         db.collection(`users/${userID}/taskProjects`)
@@ -76,13 +88,9 @@ export class Search extends React.Component {
         .update({
           request: `requested task from ${profileUser.displayName}`
         }); 
-        if(this.taskData.length) {
-            db.collection(`users/${userID}/taskProjects`)
-            .doc(`${projectId}`)
-            .collection(`Tasks`)
-            .doc(`${taskId}`)
-            .set({...this.taskData});
-        }
+        this.getTaskDataToUser(userID); 
+
+       
         async function getComments() {
             let comments = []; 
             if (comments.length) {
@@ -103,10 +111,7 @@ export class Search extends React.Component {
 
                 comments.forEach(comment => {
                     commentCollectionRef.doc(comment.commentId).set(comment.data); 
-                }); 
-                    
-                
-                
+                });                
         }
         getComments(); 
         

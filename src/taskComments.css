@@ -46,6 +46,16 @@
     border-color: black transparent transparent transparent;
   }
   
+  #commentsCount {
+    color: white;
+    font-size: .9rem;
+    position: absolute;
+    margin-left: -15px;
+    background-color: rgb(60, 87, 240);
+    border-radius: 50%;
+    padding: 2.5px;
+    width: 20px;
+  }
   @media screen and (max-width: 450px) {
 
 .assignCommentsDiv{
