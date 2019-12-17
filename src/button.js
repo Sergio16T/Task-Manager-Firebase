@@ -2,11 +2,6 @@ import React  from 'react';
 import { motion } from 'framer-motion'; 
 import { db } from './App'; 
 
-/* need to see db and if status complete or incomplete? 
-then set state accordingly. 
-*/
-
-
 
 class Button extends React.Component {
     constructor(props) {
@@ -14,7 +9,6 @@ class Button extends React.Component {
         this.state = {
             isToggled: this.props.taskComplete
         }
-        //this.setToggle = this.setToggle.bind(this); 
         this.setTaskComplete = this.setTaskComplete.bind(this); 
         this.projectId = props.projectId; 
         this.taskId = props.taskId; 

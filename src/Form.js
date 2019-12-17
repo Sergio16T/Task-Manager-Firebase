@@ -35,8 +35,6 @@ export default function Form(props) {
   
     return (
       <form id ="addTaskForm" autoComplete="off" onSubmit={handleSubmit}>
-              {/* <label id= "inputLabel" htmlFor="new-todo">   */}
-              {/* </label> */}
               <input
                 placeholder="What needs to be done?"
                 id="new-todo"

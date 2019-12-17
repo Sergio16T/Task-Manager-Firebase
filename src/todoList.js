@@ -41,8 +41,8 @@ function TodoList(props) {
       
       <ul className="unorderedListWrapper">
         {items.map((item, index) => (
-            <div key ={item.id} className="taskRow">
-          <div key = {`${index}a`} className ='itemContainer'>
+          <div key ={item.id} className="taskRow">
+            <div key = {`${index}a`} className ='itemContainer'>
             <li className ='listItems' key={item.id}>{item.Task}</li>
             <Button 
             index ={index} 
@@ -63,7 +63,7 @@ function TodoList(props) {
             itemId = {item.id}
             toggleSidePanel = {props.toggleSidePanel.bind(this, item.id)}
             /> 
-            </div>     
+          </div>     
         ))}   
       </ul>
 

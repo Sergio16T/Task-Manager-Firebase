@@ -1,13 +1,14 @@
 import React from 'react'; 
 import App from './App'; 
+import {useParams} from 'react-router-dom'; 
 import './App.css';
 
 
 
-function Project({user}) {
-
+function Project({...props}) {
+    const { projectId } = useParams(); 
      return (
-         <App user ={user} > </App>
+         <App user ={props.user} projectId = {projectId} > </App>
      )
  
 }

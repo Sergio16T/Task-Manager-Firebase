@@ -2,7 +2,11 @@ import React from 'react';
 import { firebase, db } from './App'; 
 import './searchBar.css'; 
 
-
+/* when I select user and assign task let's create a project folder called 
+requested tasks and add an alert to page when there are new requested tasks.. 
+instead of auto creating project folder with same name.. that way it doesn't 
+spam their account with all these random projects.. 
+*/
 export class Search extends React.Component {
     constructor(props){
         super(props);
@@ -134,7 +138,7 @@ export class Search extends React.Component {
         return (
             <div className="selectUserContainer">
             <div className="searchContainer" style ={this.props.style} ref ={node => this.node = node}>
-                <input autoComplete ="off" id ="searchUserInput"ref="input" placeholder="Search Users" onChange={this.handleInputChange}/> <br/>
+                <input autoComplete ="off" id ="searchUserInput" ref="input" placeholder="Search Users" onChange={this.handleInputChange}/> <br/>
                 <div id="seperator"></div>
                 {this.state.users && this.state.matches.map(user => (
                 <p className="searchResult" data-key ={user.uid} key ={user.uid} onClick={this.selectUser}>{user.displayName}</p>

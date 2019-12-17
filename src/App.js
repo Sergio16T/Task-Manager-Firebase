@@ -12,11 +12,13 @@ import WelcomeText from './WelcomeText';
 import { AppHeader } from './AppHeader'; 
 import { SidePanelComments} from './sidePanelComments'; 
 
-firebase.initializeApp(firebaseConfig); 
+
+
+firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore(); 
 
-
+// research drag and drop feature for tasks to move into project pages.. 
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,8 +29,9 @@ class App extends React.Component {
       navSideBarClassName: 'navSideBar-Container',
       sidePanelCommentsIsOpen: 'sidePanel', 
       taskId : '',
+      commentsOpen: false
+
     }
-    this.openMenu = this.openMenu.bind(this); 
   }
 
   _isMounted  = false;
@@ -72,6 +75,8 @@ class App extends React.Component {
       </div>
       </div>
       <SidePanelComments
+      projectId = {this.props.projectId}
+      commentsOpen = {this.state.commentsOpen}
       user = {this.props.user}
       toggleSidePanel={this.toggleSidePanel} 
       sidePanelClassName={this.state.sidePanelCommentsIsOpen}
@@ -80,19 +85,19 @@ class App extends React.Component {
       </div>
     );
   }
-
+ 
   toggleSidePanel = (itemId) => {
     if(this.state.sidePanelCommentsIsOpen === 'sidePanel') {
       this.setState({
         sidePanelCommentsIsOpen: 'sidePanelActive', 
-        taskId: itemId
-
-      
+        taskId: itemId, 
+        commentsOpen: true
       }); 
     } else {
       this.setState({
         sidePanelCommentsIsOpen: 'sidePanel',
-        taskId: itemId
+        //taskId: itemId,
+        commentsOpen: false
       }); 
     }
     
@@ -116,7 +121,7 @@ class App extends React.Component {
     }
   }
 
-  openMenu() {
+  openMenu = () => {
     if(this.state.responsive) {
       this.setState({
         responsive: false,

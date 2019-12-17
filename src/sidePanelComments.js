@@ -5,6 +5,15 @@ import { db } from './App';
 import { SidePanelForm} from './sidePanelForm'; 
 import formatDate from 'date-fns/format'; 
 
+function usePrevious(value) {
+    const ref = useRef(); 
+    useEffect(() => {
+        ref.current = value; 
+    });
+    return ref.current; 
+}
+
+
 export function SidePanelComments(props) {
     const [taskId, setTaskId] = useState(''); 
     const [comments, setComments] = useState([]); 
@@ -15,9 +24,17 @@ export function SidePanelComments(props) {
     const [commentsComplete, setComplete] = useState(false); 
     const scrollerRef = useRef(); 
     const shouldScrollRef = useRef(true); 
+    const prevId = usePrevious(taskId); 
 
     useEffect(()=> { 
-        //console.log('profileUser', props.user.uid)   
+        setArguments(); 
+        //console.log('profileUser', props.user.uid)  
+        if(prevId !== taskId) {
+            setComplete(false); 
+        }
+        if(commentsComplete) {
+            return; 
+        }
         shouldScrollRef.current= true; 
         let result = {}; 
         let taskData = {}; 
@@ -94,7 +111,7 @@ export function SidePanelComments(props) {
             }); 
         }
        
-        setArguments(); 
+        //setArguments(); 
         setComments([]); 
 
         if (taskId !== '') {
@@ -184,4 +201,3 @@ export function SidePanelComments(props) {
         </div>
     )
 }
-
