@@ -125,7 +125,7 @@ export function SidePanelComments(props) {
         }
     
         
-    },[props.taskId, projectId, props.user.uid, taskId, assignedUser, commentsComplete, author])
+    },[props.taskId, projectId, props.user.uid, taskId, prevId, assignedUser, commentsComplete, author])
 
     const handleScroll = () => {
         const node = scrollerRef.current; 

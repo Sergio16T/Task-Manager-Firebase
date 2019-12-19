@@ -96,7 +96,6 @@ class App extends React.Component {
     } else {
       this.setState({
         sidePanelCommentsIsOpen: 'sidePanel',
-        //taskId: itemId,
         commentsOpen: false
       }); 
     }

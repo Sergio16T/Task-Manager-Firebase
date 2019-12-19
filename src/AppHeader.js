@@ -20,7 +20,6 @@ export class AppHeader extends React.Component {
           <div id="middle"></div>
           <div id="bottom"></div>
         </div>
-        {/* <i ref ="hamburger" onClick = {this.openMenu} id ="hamburger" className="fas fa-bars"></i> */}
         <h3>TaskHub</h3>
         <div id="userPhoto" style={{backgroundImage: this.props.user ? `url(${this.props.user.photoUrl})`: ''}}></div>
         <div id="userName">{this.props.user.displayName}</div>

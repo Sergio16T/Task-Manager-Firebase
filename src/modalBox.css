@@ -60,15 +60,28 @@
 footer > button {
     cursor: pointer; 
     margin: 0vh 1.5vh; 
-    border-radius: 3px; 
+    /* border-radius: 3px;  */
     font-size: .8rem; 
     font-weight: bold;
-    padding: 3% 4%; 
+    /* padding: 3% 4%;  */
+    padding: 4% 6%; 
     
 }
 #modal-submit {
-    background-color: #db4c3f;
+    /* background-color: #db4c3f; */
+    background-color: #7fffd4; 
+    /* color: white;  */
+    color: black; 
+    /* width: 70px;  */
+    width: 90px; 
+    border-radius: 30px;
+    outline: none;
+}
+#modal-cancel {
+    background-color: #f95c5c;
     color: white; 
+    border-radius: 30px; 
+    outline: none; 
 }
 @media screen and (max-width: 450px) {
     #modal-form{
